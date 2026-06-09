@@ -17,7 +17,6 @@ body{
     direction:rtl;
 }
 
-/* BACKGROUND GRID (مثل قبلی خودت) */
 body::before{
     content:"";
     position:fixed;
@@ -29,7 +28,6 @@ body::before{
     pointer-events:none;
 }
 
-/* HEADER (کامل مثل نسخه اول) */
 .header{
     text-align:center;
     padding:40px 15px 10px;
@@ -46,7 +44,6 @@ body::before{
     opacity:0.75;
 }
 
-/* CARDS */
 .container{
     display:flex;
     flex-direction:column;
@@ -81,7 +78,6 @@ body::before{
     font-weight:bold;
 }
 
-/* BUTTONS */
 button{
     width:100%;
     padding:12px;
@@ -100,7 +96,6 @@ button{
     background:linear-gradient(135deg,#ffb300,#ff6f00);
 }
 
-/* PAY */
 .pay{
     width:92%;
     max-width:380px;
@@ -148,7 +143,6 @@ select{
     <p>بدون قطعی | مناسب گیم و شبکه‌های اجتماعی</p>
 </div>
 
-<!-- STEP 1 -->
 <div class="container" id="step1">
 
     <div class="card">
@@ -174,7 +168,6 @@ select{
 
 </div>
 
-<!-- STEP 2 -->
 <div class="container hidden" id="step2">
 
     <div class="card">
@@ -193,7 +186,6 @@ select{
 
 </div>
 
-<!-- STEP 3 -->
 <div class="pay hidden" id="step3">
 
     <h3>💳 تکمیل سفارش و پرداخت</h3>
@@ -215,7 +207,10 @@ select{
 
     <div id="rubikaBox" class="hidden">
         <p>📌 ارسال رسید به:</p>
+
         <div class="bank">@Omidi__Xx</div>
+
+        <button class="paybtn" onclick="copyId()">📋 کپی آیدی</button>
     </div>
 
     <div class="note">
@@ -230,8 +225,11 @@ let planName="";
 let basePrice=0;
 let users=1;
 
-function selectPlan(name,price){
+function formatPrice(num){
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
+function selectPlan(name,price){
     planName=name;
     basePrice=price;
 
@@ -242,13 +240,12 @@ function selectPlan(name,price){
 }
 
 function updatePrice(){
-
     users=document.getElementById("users").value;
 
     let price=basePrice*users;
 
     document.getElementById("livePrice").innerText =
-    "💰 قیمت لحظه‌ای: " + price + " تومان";
+    "💰 قیمت لحظه‌ای: " + formatPrice(price) + " تومان";
 }
 
 function goPay(){
@@ -266,14 +263,19 @@ function goPay(){
     "📦 پلن: "+planName+"<br>👤 کاربر: "+users;
 
     document.getElementById("finalPrice").innerHTML=
-    "💰 قیمت اصلی: "+price+"<br>"+
-    "🔥 تخفیف: "+discountPercent+"% (-"+discount+")<br><br>"+
-    "💳 مبلغ نهایی: "+final+" تومان";
+    "💰 قیمت اصلی: "+formatPrice(price)+"<br>"+
+    "🔥 تخفیف: "+discountPercent+"% (-"+formatPrice(discount)+")<br><br>"+
+    "💳 مبلغ نهایی: "+formatPrice(final)+" تومان";
 }
 
 function copyCard(){
     navigator.clipboard.writeText("6037997194784360");
     alert("کپی شد");
+}
+
+function copyId(){
+    navigator.clipboard.writeText("@Omidi__Xx");
+    alert("آیدی کپی شد");
 }
 
 function paidDone(){
@@ -283,4 +285,4 @@ function paidDone(){
 </script>
 
 </body>
-</html>
+    </html>
