@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VPN Shop</title>
+<title>فروشگاه کانفیگ</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;700&display=swap" rel="stylesheet">
 
@@ -17,7 +17,7 @@ body{
     direction:rtl;
 }
 
-/* GRID BACKGROUND */
+/* BACKGROUND GRID */
 body::before{
     content:"";
     position:fixed;
@@ -29,171 +29,107 @@ body::before{
     pointer-events:none;
 }
 
-/* TOP STEPPER */
-.stepper{
-    display:flex;
-    justify-content:space-between;
-    padding:20px 15px;
-    max-width:420px;
-    margin:auto;
-}
-
-.step{
-    text-align:center;
-    flex:1;
-    position:relative;
-}
-
-.step .circle{
-    width:38px;
-    height:38px;
-    margin:auto;
-    border-radius:50%;
-    border:1px solid rgba(255,255,255,0.2);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:13px;
-    color:#aaa;
-}
-
-.step.active .circle{
-    border-color:#2f81f7;
-    color:#2f81f7;
-    box-shadow:0 0 12px rgba(47,129,247,0.4);
-}
-
-.step span{
-    font-size:11px;
-    opacity:0.6;
-}
-
-/* HEADER CARD */
+/* HEADER */
 .header{
     text-align:center;
-    margin-top:10px;
+    padding:40px 15px 20px;
 }
 
-.logo{
-    width:85px;
-    height:85px;
-    margin:auto;
-    border-radius:50%;
-    background:radial-gradient(circle,#0d1b2a,#05070d);
-    border:2px solid #2f81f7;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:36px;
-    color:#2f81f7;
-    box-shadow:0 0 25px rgba(47,129,247,0.4);
+.header h1{
+    font-size:26px;
+    background:linear-gradient(90deg,#00c853,#2f81f7);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
 }
 
-h1{
-    font-size:30px;
-    margin-top:10px;
+.header p{
+    opacity:0.7;
 }
 
-.badges{
-    display:flex;
-    justify-content:center;
-    gap:8px;
-    flex-wrap:wrap;
-    margin-top:10px;
-}
-
-.badge{
-    font-size:11px;
-    padding:6px 10px;
-    border-radius:20px;
-    background:rgba(255,255,255,0.04);
-    border:1px solid rgba(255,255,255,0.08);
-}
-
-/* ALERT */
-.alert{
-    margin:20px auto;
-    width:90%;
-    max-width:420px;
-    padding:12px;
-    border-radius:12px;
-    border:1px solid #f59e0b;
-    background:rgba(245,158,11,0.08);
-    color:#fbbf24;
-    display:flex;
-    justify-content:space-between;
-}
-
-/* SECTION */
-.section{
-    text-align:center;
-    margin-top:20px;
-}
-
-.section h3{
-    font-size:17px;
-    opacity:0.9;
-}
-
-/* PLAN BOXES */
-.plans{
+/* PLANS */
+.container{
     display:flex;
     flex-direction:column;
-    gap:15px;
     align-items:center;
-    margin-top:15px;
+    gap:15px;
+    padding:10px;
 }
 
-.plan{
-    width:90%;
-    max-width:420px;
-    padding:16px;
+.card{
+    width:92%;
+    max-width:380px;
+    padding:18px;
     border-radius:16px;
     background:rgba(255,255,255,0.04);
     border:1px solid rgba(255,255,255,0.08);
     backdrop-filter:blur(10px);
+    transition:0.3s;
 }
 
-.plan-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+.card:hover{
+    transform:translateY(-3px);
+    border-color:#00e676;
 }
 
-.plan h3{
-    margin:0;
+/* TITLE */
+.title{
+    font-size:18px;
     color:#2f81f7;
-    font-size:16px;
+    margin-bottom:8px;
 }
 
-.plan small{
-    opacity:0.6;
-}
-
+/* PRICE */
 .price{
-    margin-top:10px;
+    margin:10px 0;
     color:#00e676;
     font-weight:bold;
-}
-
-/* RADIO */
-.radio{
-    width:18px;
-    height:18px;
-    border-radius:50%;
-    border:2px solid rgba(255,255,255,0.2);
 }
 
 /* BUTTON */
 button{
     width:100%;
-    margin-top:12px;
     padding:12px;
     border:none;
     border-radius:12px;
-    background:linear-gradient(135deg,#00c853,#00e676);
     font-weight:bold;
     cursor:pointer;
+    margin-top:8px;
+}
+
+.buy{
+    background:linear-gradient(135deg,#00c853,#00e676);
+}
+
+.done{
+    background:linear-gradient(135deg,#ffb300,#ff6f00);
+}
+
+/* PAY BOX */
+.pay{
+    width:92%;
+    max-width:380px;
+    margin:20px auto;
+    padding:18px;
+    border-radius:16px;
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.08);
+    text-align:center;
+}
+
+.bank{
+    background:#0f172a;
+    padding:10px;
+    border-radius:10px;
+    margin:10px 0;
+    border:1px solid rgba(255,255,255,0.1);
+}
+
+.hidden{display:none;}
+
+.note{
+    font-size:12px;
+    opacity:0.7;
+    margin-top:10px;
 }
 
 </style>
@@ -201,81 +137,82 @@ button{
 
 <body>
 
-<!-- STEP -->
-<div class="stepper">
-    <div class="step active">
-        <div class="circle">1</div>
-        <span>انتخاب</span>
-    </div>
-    <div class="step">
-        <div class="circle">2</div>
-        <span>کاربر</span>
-    </div>
-    <div class="step">
-        <div class="circle">3</div>
-        <span>شماره</span>
-    </div>
-    <div class="step">
-        <div class="circle">4</div>
-        <span>پرداخت</span>
-    </div>
-    <div class="step">
-        <div class="circle">5</div>
-        <span>دریافت</span>
-    </div>
-</div>
-
-<!-- HEADER -->
 <div class="header">
-    <div class="logo">N</div>
-    <h1>NabegheVPN</h1>
-
-    <div class="badges">
-        <div class="badge">پشتیبانی ۲۴/۷</div>
-        <div class="badge">سرعت بالا</div>
-        <div class="badge">نامحدود</div>
-    </div>
-</div>
-
-<!-- ALERT -->
-<div class="alert">
-    <div>اختلال در برخی اپراتورها</div>
-    <div>⚡</div>
-</div>
-
-<!-- TITLE -->
-<div class="section">
-    <h3>مدت زمان سرویس را انتخاب کنید</h3>
+    <h1>فروشگاه کانفیگ حرفه‌ای</h1>
+    <p>سریع | پایدار | نامحدود</p>
 </div>
 
 <!-- PLANS -->
-<div class="plans">
+<div class="container" id="plans">
 
-    <div class="plan">
-        <div class="plan-top">
-            <div>
-                <h3>تک کاربره</h3>
-                <small>دستگاه محدود</small>
-            </div>
-            <div class="radio"></div>
-        </div>
-        <div class="price">350,000 تومان</div>
-        <button>انتخاب</button>
+    <div class="card">
+        <div class="title">🔵 ۱ هفته‌ای</div>
+        <div>حجم نامحدود</div>
+        <div class="price">120,000 تومان</div>
+        <button class="buy" onclick="goPay('۱ هفته‌ای')">انتخاب</button>
     </div>
 
-    <div class="plan">
-        <div class="plan-top">
-            <div>
-                <h3>دو کاربره</h3>
-                <small>دو دستگاه</small>
-            </div>
-            <div class="radio"></div>
-        </div>
-        <div class="price">500,000 تومان</div>
-        <button>انتخاب</button>
+    <div class="card">
+        <div class="title">🟣 ۲ هفته‌ای</div>
+        <div>حجم نامحدود</div>
+        <div class="price">220,000 تومان</div>
+        <button class="buy" onclick="goPay('۲ هفته‌ای')">انتخاب</button>
+    </div>
+
+    <div class="card">
+        <div class="title">🟢 ۱ ماهه</div>
+        <div>حجم نامحدود</div>
+        <div class="price">350,000 تومان</div>
+        <button class="buy" onclick="goPay('۱ ماهه')">انتخاب</button>
     </div>
 
 </div>
 
+<!-- PAY -->
+<div class="pay hidden" id="payBox">
+
+    <h3>💳 پرداخت سفارش</h3>
+
+    <div class="bank">
+        6037 - 9971 - 9478 - 4360
+        <br>
+        ماهان امیدی
+    </div>
+
+    <div id="selected"></div>
+
+    <button class="buy" onclick="copyCard()">کپی کارت</button>
+
+    <button class="done" onclick="done()">✔ پرداخت کردم</button>
+
+    <div class="note">بعد از زدن دکمه شما به پشتیبانی منتقل می‌شوید</div>
+
+</div>
+
+<script>
+
+let selectedPlan="";
+
+function goPay(plan){
+    selectedPlan = plan;
+    document.getElementById("selected").innerHTML =
+    "پلن انتخابی: " + plan;
+
+    document.getElementById("plans").classList.add("hidden");
+    document.getElementById("payBox").classList.remove("hidden");
+}
+
+function copyCard(){
+    navigator.clipboard.writeText("6037997194784360");
+    alert("کپی شد");
+}
+
+function done(){
+    // اینجا پیوی خودت
+    window.location.href = "https://t.me/yourusername";
+}
+
+</script>
+
 </body>
-        </html>
+</html>
