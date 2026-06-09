@@ -2,95 +2,189 @@
 <html lang="fa">
 <head>
 <meta charset="UTF-8">
-<title>فروشگاه کانفیگ حرفه‌ای</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nabeghe Clone</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
+
 body{
     margin:0;
     font-family:"Vazirmatn",sans-serif;
     background:#070b14;
     color:white;
+    direction:rtl;
 }
 
-/* HERO */
-.hero{
-    text-align:center;
-    padding:50px 20px 30px;
-    background:radial-gradient(circle at top,#0d1b2a,#05070d);
+/* GRID BACKGROUND مثل عکس */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size:40px 40px;
+    pointer-events:none;
 }
 
-.hero h1{
-    font-size:28px;
-}
-
-.hero p{
-    opacity:0.7;
+/* TOP TIMER */
+.top-bar{
+    display:flex;
+    justify-content:center;
+    padding:15px;
 }
 
 .timer{
-    display:inline-block;
-    margin-top:12px;
-    padding:10px 18px;
+    padding:8px 18px;
+    border-radius:25px;
     border:1px solid #2f81f7;
-    border-radius:20px;
     color:#2f81f7;
     font-weight:bold;
+    font-size:14px;
+    box-shadow:0 0 20px rgba(47,129,247,0.3);
+}
+
+/* LOGO SECTION */
+.logo-box{
+    text-align:center;
+    margin-top:20px;
+}
+
+.logo{
+    width:90px;
+    height:90px;
+    margin:auto;
+    border-radius:50%;
+    background:radial-gradient(circle,#0d1b2a,#05070d);
+    border:2px solid #2f81f7;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:40px;
+    font-weight:bold;
+    color:#2f81f7;
+    box-shadow:0 0 30px rgba(47,129,247,0.4);
+}
+
+.title{
+    font-size:34px;
+    margin-top:15px;
+    font-weight:700;
+    letter-spacing:1px;
+}
+
+/* BADGES */
+.badges{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:15px;
+}
+
+.badge{
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:12px;
+    border:1px solid rgba(255,255,255,0.1);
+    background:rgba(255,255,255,0.03);
+}
+
+/* WARNING BOX */
+.warn{
+    margin:25px auto;
+    width:90%;
+    max-width:420px;
+    padding:15px;
+    border-radius:14px;
+    border:1px solid #f59e0b;
+    background:rgba(245,158,11,0.08);
+    color:#fbbf24;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
 /* STEPS */
 .steps{
     display:flex;
     justify-content:center;
-    gap:8px;
-    flex-wrap:wrap;
-    padding:20px;
+    gap:10px;
+    margin:30px 10px;
 }
 
 .step{
-    padding:8px 12px;
-    border-radius:20px;
-    background:rgba(255,255,255,0.05);
-    font-size:12px;
+    width:60px;
+    text-align:center;
+}
+
+.circle{
+    width:40px;
+    height:40px;
+    margin:auto;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,0.2);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#aaa;
+}
+
+.step.active .circle{
+    border-color:#2f81f7;
+    color:#2f81f7;
+    box-shadow:0 0 15px rgba(47,129,247,0.3);
+}
+
+.step span{
+    font-size:11px;
+    opacity:0.7;
 }
 
 /* SECTION */
 .section{
-    padding:20px;
     text-align:center;
+    margin-top:20px;
 }
 
-.title{
-    font-size:20px;
-    margin-bottom:10px;
+.section h3{
+    font-size:18px;
 }
 
-/* PLANS */
-.grid{
+/* PLAN CARDS (پایین صفحه) */
+.plans{
     display:flex;
     flex-direction:column;
     align-items:center;
     gap:15px;
+    margin-top:20px;
 }
 
 .plan{
     width:90%;
-    max-width:360px;
+    max-width:380px;
     padding:18px;
     border-radius:16px;
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.1);
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.08);
     backdrop-filter:blur(10px);
 }
 
-.plan h3{
+.plan h4{
+    margin:0;
     color:#2f81f7;
 }
 
-.price{
+.plan p{
+    opacity:0.7;
     margin:10px 0;
-    opacity:0.8;
+}
+
+.price{
+    color:#00e676;
+    font-weight:bold;
 }
 
 button{
@@ -103,111 +197,79 @@ button{
     cursor:pointer;
 }
 
-/* PAY */
-.pay-box{
-    width:90%;
-    max-width:360px;
-    margin:20px auto;
-    padding:18px;
-    border-radius:16px;
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.1);
-    text-align:center;
-}
-
-.card{
-    background:#0f172a;
-    padding:10px;
-    border-radius:10px;
-    margin:10px 0;
-}
-
-.hidden{display:none;}
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
-<div class="hero">
-    <h1>💼 فروشگاه کانفیگ حرفه‌ای</h1>
-    <p>سریع | پایدار | بدون قطعی</p>
-    <div class="timer" id="timer">00:00:00</div>
+<div class="top-bar">
+    <div class="timer" id="timer">13:38:31</div>
 </div>
 
-<!-- STEPS -->
-<div class="steps">
-    <div class="step">1 انتخاب پلن</div>
-    <div class="step">2 ثبت سفارش</div>
-    <div class="step">3 پرداخت</div>
-    <div class="step">4 دریافت</div>
-</div>
+<div class="logo-box">
+    <div class="logo">N</div>
+    <div class="title">NabegheVPN</div>
 
-<!-- PLANS -->
-<div class="section" id="plans">
-
-    <div class="title">🔥 انتخاب پلن</div>
-
-    <div class="grid">
-
-        <div class="plan">
-            <h3>کانفیگ معمولی</h3>
-            <div class="price">1GB - 120,000 تومان</div>
-            <button onclick="goPay('معمولی - 1GB - 120k')">خرید</button>
-        </div>
-
-        <div class="plan">
-            <h3>کانفیگ قوی</h3>
-            <div class="price">2GB - 450,000 تومان</div>
-            <button onclick="goPay('قوی - 2GB - 450k')">خرید</button>
-        </div>
-
-        <div class="plan">
-            <h3>VIP</h3>
-            <div class="price">10GB - 2,000,000 تومان</div>
-            <button onclick="goPay('VIP - 10GB - 2M')">خرید</button>
-        </div>
-
+    <div class="badges">
+        <div class="badge">پشتیبانی ۲۴/۷</div>
+        <div class="badge">سرعت بالا ⚡</div>
+        <div class="badge">ترافیک نامحدود ∞</div>
     </div>
 </div>
 
-<!-- PAY -->
-<div class="pay-box hidden" id="payBox">
-    <h3>💳 پرداخت سفارش</h3>
+<div class="warn">
+    <div>اختلال در برخی اپراتورها</div>
+    <div>⚡</div>
+</div>
 
-    <div class="card" id="selectedPlan"></div>
+<div class="steps">
+    <div class="step active">
+        <div class="circle">1</div>
+        <span>انتخاب پلن</span>
+    </div>
+    <div class="step">
+        <div class="circle">2</div>
+        <span>تعداد کاربر</span>
+    </div>
+    <div class="step">
+        <div class="circle">3</div>
+        <span>شماره</span>
+    </div>
+    <div class="step">
+        <div class="circle">4</div>
+        <span>واریز</span>
+    </div>
+    <div class="step">
+        <div class="circle">5</div>
+        <span>دریافت</span>
+    </div>
+</div>
 
-    <p>کارت:</p>
-    <div class="card">6037997194784360</div>
+<div class="section">
+    <h3>مدت زمان سرویس را انتخاب کنید</h3>
+</div>
 
-    <button onclick="copyCard()">کپی کارت</button>
-    <br><br>
-    <button onclick="donePay()">✔ پرداخت کردم</button>
+<div class="plans">
+
+    <div class="plan">
+        <h4>۲ هفته‌ای</h4>
+        <p>نامحدود</p>
+        <div class="price">120,000 تومان</div>
+        <button>انتخاب</button>
+    </div>
+
+    <div class="plan">
+        <h4>۱ ماهه</h4>
+        <p>نامحدود</p>
+        <div class="price">220,000 تومان</div>
+        <button>انتخاب</button>
+    </div>
+
 </div>
 
 <script>
-
-let selected="";
-
-function goPay(plan){
-    selected = plan;
-    document.getElementById("selectedPlan").innerText = plan;
-
-    document.getElementById("plans").classList.add("hidden");
-    document.getElementById("payBox").classList.remove("hidden");
-}
-
-function copyCard(){
-    navigator.clipboard.writeText("6037997194784360");
-    alert("کپی شد");
-}
-
-function donePay(){
-    alert("✔ سفارش ثبت شد. پشتیبانی پیام می‌دهد");
-}
-
-// TIMER
-let s=0,m=0,h=13;
+// تایمر ساده مثل عکس
+let h=13,m=38,s=31;
 
 setInterval(()=>{
     s++;
@@ -217,8 +279,7 @@ setInterval(()=>{
     document.getElementById("timer").innerText =
     `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
 },1000);
-
 </script>
 
 </body>
-</html>
+    </html>
