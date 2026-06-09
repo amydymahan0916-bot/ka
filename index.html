@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<title>فروشگاه کانفیگ حرفه‌ای</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    font-family:"Vazirmatn",sans-serif;
+    background:#070b14;
+    color:white;
+}
+
+/* HERO */
+.hero{
+    text-align:center;
+    padding:50px 20px 30px;
+    background:radial-gradient(circle at top,#0d1b2a,#05070d);
+}
+
+.hero h1{
+    font-size:28px;
+}
+
+.hero p{
+    opacity:0.7;
+}
+
+.timer{
+    display:inline-block;
+    margin-top:12px;
+    padding:10px 18px;
+    border:1px solid #2f81f7;
+    border-radius:20px;
+    color:#2f81f7;
+    font-weight:bold;
+}
+
+/* STEPS */
+.steps{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:wrap;
+    padding:20px;
+}
+
+.step{
+    padding:8px 12px;
+    border-radius:20px;
+    background:rgba(255,255,255,0.05);
+    font-size:12px;
+}
+
+/* SECTION */
+.section{
+    padding:20px;
+    text-align:center;
+}
+
+.title{
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+/* PLANS */
+.grid{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:15px;
+}
+
+.plan{
+    width:90%;
+    max-width:360px;
+    padding:18px;
+    border-radius:16px;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.1);
+    backdrop-filter:blur(10px);
+}
+
+.plan h3{
+    color:#2f81f7;
+}
+
+.price{
+    margin:10px 0;
+    opacity:0.8;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(135deg,#00c853,#00e676);
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* PAY */
+.pay-box{
+    width:90%;
+    max-width:360px;
+    margin:20px auto;
+    padding:18px;
+    border-radius:16px;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.1);
+    text-align:center;
+}
+
+.card{
+    background:#0f172a;
+    padding:10px;
+    border-radius:10px;
+    margin:10px 0;
+}
+
+.hidden{display:none;}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>💼 فروشگاه کانفیگ حرفه‌ای</h1>
+    <p>سریع | پایدار | بدون قطعی</p>
+    <div class="timer" id="timer">00:00:00</div>
+</div>
+
+<!-- STEPS -->
+<div class="steps">
+    <div class="step">1 انتخاب پلن</div>
+    <div class="step">2 ثبت سفارش</div>
+    <div class="step">3 پرداخت</div>
+    <div class="step">4 دریافت</div>
+</div>
+
+<!-- PLANS -->
+<div class="section" id="plans">
+
+    <div class="title">🔥 انتخاب پلن</div>
+
+    <div class="grid">
+
+        <div class="plan">
+            <h3>کانفیگ معمولی</h3>
+            <div class="price">1GB - 120,000 تومان</div>
+            <button onclick="goPay('معمولی - 1GB - 120k')">خرید</button>
+        </div>
+
+        <div class="plan">
+            <h3>کانفیگ قوی</h3>
+            <div class="price">2GB - 450,000 تومان</div>
+            <button onclick="goPay('قوی - 2GB - 450k')">خرید</button>
+        </div>
+
+        <div class="plan">
+            <h3>VIP</h3>
+            <div class="price">10GB - 2,000,000 تومان</div>
+            <button onclick="goPay('VIP - 10GB - 2M')">خرید</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- PAY -->
+<div class="pay-box hidden" id="payBox">
+    <h3>💳 پرداخت سفارش</h3>
+
+    <div class="card" id="selectedPlan"></div>
+
+    <p>کارت:</p>
+    <div class="card">6037997194784360</div>
+
+    <button onclick="copyCard()">کپی کارت</button>
+    <br><br>
+    <button onclick="donePay()">✔ پرداخت کردم</button>
+</div>
+
+<script>
+
+let selected="";
+
+function goPay(plan){
+    selected = plan;
+    document.getElementById("selectedPlan").innerText = plan;
+
+    document.getElementById("plans").classList.add("hidden");
+    document.getElementById("payBox").classList.remove("hidden");
+}
+
+function copyCard(){
+    navigator.clipboard.writeText("6037997194784360");
+    alert("کپی شد");
+}
+
+function donePay(){
+    alert("✔ سفارش ثبت شد. پشتیبانی پیام می‌دهد");
+}
+
+// TIMER
+let s=0,m=0,h=13;
+
+setInterval(()=>{
+    s++;
+    if(s==60){s=0;m++}
+    if(m==60){m=0;h++}
+
+    document.getElementById("timer").innerText =
+    `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+},1000);
+
+</script>
+
+</body>
+</html>
