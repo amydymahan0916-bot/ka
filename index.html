@@ -25,12 +25,12 @@ body::before{
     linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),
     linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);
     background-size:40px 40px;
-    pointer-events:none;
 }
 
+/* HEADER */
 .header{
     text-align:center;
-    padding:40px 15px 10px;
+    padding:35px 15px 10px;
 }
 
 .header h1{
@@ -40,8 +40,23 @@ body::before{
     -webkit-text-fill-color:transparent;
 }
 
-.header p{opacity:0.75;}
+/* STEPS */
+.steps{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    padding:10px;
+    flex-wrap:wrap;
+}
 
+.step{
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:12px;
+    background:rgba(255,255,255,0.05);
+}
+
+/* CONTAINER */
 .container{
     display:flex;
     flex-direction:column;
@@ -50,6 +65,7 @@ body::before{
     padding:10px;
 }
 
+/* CARD */
 .card{
     width:92%;
     max-width:380px;
@@ -83,7 +99,6 @@ button{
     padding:18px;
     border-radius:16px;
     background:rgba(255,255,255,0.04);
-    text-align:center;
 }
 
 .bank{
@@ -98,9 +113,9 @@ select{
     padding:10px;
     border-radius:10px;
     border:none;
-    margin-top:10px;
     background:#0f172a;
     color:white;
+    margin-top:10px;
 }
 
 .hidden{display:none;}
@@ -117,50 +132,69 @@ select{
 
 <div class="header">
     <h1>⚡ فروشگاه کانفیگ ماهان</h1>
-    <p>بدون قطعی | مناسب گیم</p>
 </div>
 
-<!-- PLANS -->
-<div class="container" id="plans">
+<!-- STEP INDICATOR -->
+<div class="steps">
+    <div class="step">1 انتخاب پلن</div>
+    <div class="step">2 انتخاب کاربر</div>
+    <div class="step">3 پرداخت</div>
+</div>
+
+<!-- STEP 1: PLANS -->
+<div class="container" id="step1">
 
     <div class="card">
         <div class="title">۱ هفته‌ای</div>
         <div class="price">120,000 تومان</div>
-        <button class="buy" onclick="goPay('۱ هفته‌ای',120000)">خرید</button>
+        <button class="buy" onclick="selectPlan('۱ هفته‌ای',120000)">انتخاب</button>
     </div>
 
     <div class="card">
         <div class="title">۲ هفته‌ای</div>
         <div class="price">220,000 تومان</div>
-        <button class="buy" onclick="goPay('۲ هفته‌ای',220000)">خرید</button>
+        <button class="buy" onclick="selectPlan('۲ هفته‌ای',220000)">انتخاب</button>
     </div>
 
     <div class="card">
         <div class="title">۱ ماهه</div>
         <div class="price">350,000 تومان</div>
-        <button class="buy" onclick="goPay('۱ ماهه',350000)">خرید</button>
+        <button class="buy" onclick="selectPlan('۱ ماهه',350000)">انتخاب</button>
     </div>
 
 </div>
 
-<!-- PAY -->
-<div class="pay hidden" id="payBox">
+<!-- STEP 2: USERS -->
+<div class="container hidden" id="step2">
 
-    <h3>💳 پرداخت</h3>
+    <div class="card">
+        <div class="title">👤 انتخاب تعداد کاربر</div>
+
+        <select id="users">
+            <option value="1">1 کاربره</option>
+            <option value="2">2 کاربره</option>
+            <option value="3">3 کاربره</option>
+        </select>
+
+        <button class="buy" onclick="goPay()">ادامه</button>
+    </div>
+
+</div>
+
+<!-- STEP 3: PAYMENT -->
+<div class="pay hidden" id="step3">
+
+    <h3>💳 پرداخت نهایی</h3>
 
     <div class="bank" id="info"></div>
 
-    <!-- USER COUNT -->
-    <p>👤 تعداد کاربر:</p>
-    <select id="userCount" onchange="calcPrice()">
-        <option value="1">1 کاربره</option>
-        <option value="2">2 کاربره</option>
-        <option value="3">3 کاربره</option>
-    </select>
+    <div class="bank">
+        💳 6037997194784360
+        <br>
+        👤 ماهان امیدی
+    </div>
 
-    <div class="bank" id="priceBox">قیمت: ---</div>
-
-    <div class="bank" id="finalBox"></div>
+    <div class="bank" id="finalPrice"></div>
 
     <button class="buy" onclick="copyCard()">کپی کارت</button>
     <button class="buy" onclick="paid()">✔ پرداخت کردم</button>
@@ -169,42 +203,37 @@ select{
 
 <script>
 
-let basePrice=0;
 let planName="";
+let basePrice=0;
 
-function goPay(plan,price){
-
-    planName = plan;
+function selectPlan(name,price){
+    planName = name;
     basePrice = price;
 
-    document.getElementById("info").innerHTML =
-    "📦 پلن: " + plan;
-
-    document.getElementById("plans").classList.add("hidden");
-    document.getElementById("payBox").classList.remove("hidden");
-
-    calcPrice();
+    document.getElementById("step1").classList.add("hidden");
+    document.getElementById("step2").classList.remove("hidden");
 }
 
-function calcPrice(){
+function goPay(){
 
-    let count = document.getElementById("userCount").value;
+    let users = document.getElementById("users").value;
 
-    let price = basePrice * count;
+    let price = basePrice * users;
 
-    // 🔥 تخفیف رندوم 10 تا 15 درصد
-    let discountPercent = Math.floor(Math.random() * 6) + 10;
-
-    let discount = Math.floor(price * (discountPercent / 100));
-
+    let discountPercent = Math.floor(Math.random()*6)+10;
+    let discount = Math.floor(price * (discountPercent/100));
     let final = price - discount;
 
-    document.getElementById("priceBox").innerHTML =
-    "💰 قیمت اصلی: " + price + " تومان";
+    document.getElementById("step2").classList.add("hidden");
+    document.getElementById("step3").classList.remove("hidden");
 
-    document.getElementById("finalBox").innerHTML =
+    document.getElementById("info").innerHTML =
+    "📦 پلن: " + planName + "<br>👤 کاربران: " + users;
+
+    document.getElementById("finalPrice").innerHTML =
+    "💰 قیمت اصلی: " + price + "<br>" +
     "🔥 تخفیف: " + discountPercent + "% (-" + discount + ")<br><br>" +
-    "<span class='discount'>💰 مبلغ نهایی: " + final + " تومان</span>";
+    "<b class='discount'>💳 مبلغ نهایی: " + final + " تومان</b>";
 }
 
 function copyCard(){
