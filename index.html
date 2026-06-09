@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>فروشگاه فروشگاه ماهان</title>
+<title>فروشگاه کانفیگ ماهان</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;700&display=swap" rel="stylesheet">
 
@@ -17,7 +17,6 @@ body{
     direction:rtl;
 }
 
-/* BACKGROUND GRID */
 body::before{
     content:"";
     position:fixed;
@@ -29,7 +28,6 @@ body::before{
     pointer-events:none;
 }
 
-/* HEADER */
 .header{
     text-align:center;
     padding:40px 15px 10px;
@@ -42,11 +40,8 @@ body::before{
     -webkit-text-fill-color:transparent;
 }
 
-.header p{
-    opacity:0.75;
-}
+.header p{opacity:0.75;}
 
-/* CARDS */
 .container{
     display:flex;
     flex-direction:column;
@@ -62,26 +57,11 @@ body::before{
     border-radius:16px;
     background:rgba(255,255,255,0.04);
     border:1px solid rgba(255,255,255,0.08);
-    backdrop-filter:blur(10px);
 }
 
-.title{
-    font-size:18px;
-    color:#2f81f7;
-}
+.title{color:#2f81f7;font-size:18px}
+.price{color:#00e676;font-weight:bold;margin-top:10px}
 
-.desc{
-    font-size:13px;
-    opacity:0.7;
-}
-
-.price{
-    margin-top:10px;
-    color:#00e676;
-    font-weight:bold;
-}
-
-/* BUTTONS */
 button{
     width:100%;
     padding:12px;
@@ -96,11 +76,6 @@ button{
     background:linear-gradient(135deg,#00c853,#00e676);
 }
 
-.paybtn{
-    background:linear-gradient(135deg,#ffb300,#ff6f00);
-}
-
-/* PAY */
 .pay{
     width:92%;
     max-width:380px;
@@ -108,7 +83,6 @@ button{
     padding:18px;
     border-radius:16px;
     background:rgba(255,255,255,0.04);
-    border:1px solid rgba(255,255,255,0.08);
     text-align:center;
 }
 
@@ -117,16 +91,24 @@ button{
     padding:10px;
     border-radius:10px;
     margin:10px 0;
-    border:1px solid rgba(255,255,255,0.1);
 }
 
-.note{
-    font-size:12px;
-    opacity:0.7;
+select{
+    width:100%;
+    padding:10px;
+    border-radius:10px;
+    border:none;
     margin-top:10px;
+    background:#0f172a;
+    color:white;
 }
 
 .hidden{display:none;}
+
+.discount{
+    color:#ffb300;
+    font-weight:bold;
+}
 
 </style>
 </head>
@@ -135,31 +117,28 @@ button{
 
 <div class="header">
     <h1>⚡ فروشگاه کانفیگ ماهان</h1>
-    <p>بدون قطعی | مناسب گیم و شبکه‌های اجتماعی</p>
+    <p>بدون قطعی | مناسب گیم</p>
 </div>
 
 <!-- PLANS -->
 <div class="container" id="plans">
 
     <div class="card">
-        <div class="title">🟢 پلن ۱ هفته‌ای (پیشنهادی)</div>
-        <div class="desc">مناسب تست و مصرف کوتاه</div>
+        <div class="title">۱ هفته‌ای</div>
         <div class="price">120,000 تومان</div>
-        <button class="buy" onclick="goPay('۱ هفته‌ای')">🚀 دریافت سرویس</button>
+        <button class="buy" onclick="goPay('۱ هفته‌ای',120000)">خرید</button>
     </div>
 
     <div class="card">
-        <div class="title">🔵 پلن ۲ هفته‌ای</div>
-        <div class="desc">مناسب استفاده متوسط</div>
+        <div class="title">۲ هفته‌ای</div>
         <div class="price">220,000 تومان</div>
-        <button class="buy" onclick="goPay('۲ هفته‌ای')">🚀 دریافت سرویس</button>
+        <button class="buy" onclick="goPay('۲ هفته‌ای',220000)">خرید</button>
     </div>
 
     <div class="card">
-        <div class="title">🟣 پلن ۱ ماهه</div>
-        <div class="desc">بهترین انتخاب کاربران حرفه‌ای</div>
+        <div class="title">۱ ماهه</div>
         <div class="price">350,000 تومان</div>
-        <button class="buy" onclick="goPay('۱ ماهه')">🚀 دریافت سرویس</button>
+        <button class="buy" onclick="goPay('۱ ماهه',350000)">خرید</button>
     </div>
 
 </div>
@@ -167,85 +146,74 @@ button{
 <!-- PAY -->
 <div class="pay hidden" id="payBox">
 
-    <h3>💳 تکمیل سفارش و پرداخت</h3>
+    <h3>💳 پرداخت</h3>
 
-    <p class="desc">لطفاً مبلغ زیر را کارت به کارت کنید</p>
+    <div class="bank" id="info"></div>
 
-    <!-- پلن -->
-    <div class="bank" id="planBox">پلن انتخاب نشده</div>
+    <!-- USER COUNT -->
+    <p>👤 تعداد کاربر:</p>
+    <select id="userCount" onchange="calcPrice()">
+        <option value="1">1 کاربره</option>
+        <option value="2">2 کاربره</option>
+        <option value="3">3 کاربره</option>
+    </select>
 
-    <!-- مبلغ -->
-    <div class="bank" id="priceBox">مبلغ: ---</div>
+    <div class="bank" id="priceBox">قیمت: ---</div>
 
-    <!-- کارت -->
-    <div class="bank">
-        💳 6037 **** **** 4360
-        <br>
-        👤 ماهان امیدی
-    </div>
+    <div class="bank" id="finalBox"></div>
 
-    <button class="buy" onclick="copyCard()">📋 کپی شماره کارت</button>
-
-    <button class="paybtn" onclick="paidDone()">✔ تایید پرداخت</button>
-
-    <!-- RUBIKA -->
-    <div id="rubikaBox" class="hidden">
-        <p style="margin-top:15px;">
-            📌 لطفاً رسید پرداخت را ارسال کنید
-        </p>
-
-        <div class="bank">@Omidi__xx</div>
-
-        <button class="buy" onclick="copyRubika()">📋 کپی آیدی</button>
-    </div>
-
-    <div class="note">
-        بررسی و فعال‌سازی بعد از ارسال رسید انجام می‌شود
-    </div>
+    <button class="buy" onclick="copyCard()">کپی کارت</button>
+    <button class="buy" onclick="paid()">✔ پرداخت کردم</button>
 
 </div>
 
 <script>
 
-let selectedPlan="";
-let selectedPrice="";
+let basePrice=0;
+let planName="";
 
-function goPay(plan){
+function goPay(plan,price){
 
-    selectedPlan = plan;
+    planName = plan;
+    basePrice = price;
 
-    if(plan=="۱ هفته‌ای"){
-        selectedPrice="120,000 تومان";
-    }
-    if(plan=="۲ هفته‌ای"){
-        selectedPrice="220,000 تومان";
-    }
-    if(plan=="۱ ماهه"){
-        selectedPrice="350,000 تومان";
-    }
-
-    document.getElementById("planBox").innerHTML =
-    "📦 پلن انتخابی: " + plan;
-
-    document.getElementById("priceBox").innerHTML =
-    "💰 مبلغ قابل پرداخت: " + selectedPrice;
+    document.getElementById("info").innerHTML =
+    "📦 پلن: " + plan;
 
     document.getElementById("plans").classList.add("hidden");
     document.getElementById("payBox").classList.remove("hidden");
+
+    calcPrice();
+}
+
+function calcPrice(){
+
+    let count = document.getElementById("userCount").value;
+
+    let price = basePrice * count;
+
+    // 🔥 تخفیف رندوم 10 تا 15 درصد
+    let discountPercent = Math.floor(Math.random() * 6) + 10;
+
+    let discount = Math.floor(price * (discountPercent / 100));
+
+    let final = price - discount;
+
+    document.getElementById("priceBox").innerHTML =
+    "💰 قیمت اصلی: " + price + " تومان";
+
+    document.getElementById("finalBox").innerHTML =
+    "🔥 تخفیف: " + discountPercent + "% (-" + discount + ")<br><br>" +
+    "<span class='discount'>💰 مبلغ نهایی: " + final + " تومان</span>";
 }
 
 function copyCard(){
     navigator.clipboard.writeText("6037997194784360");
-    alert("شماره کارت کپی شد");
+    alert("کپی شد");
 }
 
-function paidDone(){
-    document.getElementById("rubikaBox").classList.remove("hidden");
-}
-
-function copyRubika(){
-    navigator.clipboard.writeText("@Omidi__Xx");
-    alert("آیدی کپی شد");
+function paid(){
+    alert("سفارش ثبت شد");
 }
 
 </script>
