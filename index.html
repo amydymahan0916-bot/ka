@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>فروشگاه کانفیگ</title>
+<title>فروشگاه کانفیگ ماهان</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;700&display=swap" rel="stylesheet">
 
@@ -11,13 +11,13 @@
 
 body{
     margin:0;
-    font-family:"Vazirmatn";
+    font-family:"Vazirmatn",sans-serif;
     background:#070b14;
     color:white;
     direction:rtl;
 }
 
-/* BACKGROUND GRID */
+/* GRID BACKGROUND */
 body::before{
     content:"";
     position:fixed;
@@ -46,7 +46,7 @@ body::before{
     opacity:0.7;
 }
 
-/* PLANS */
+/* CARDS */
 .container{
     display:flex;
     flex-direction:column;
@@ -63,29 +63,22 @@ body::before{
     background:rgba(255,255,255,0.04);
     border:1px solid rgba(255,255,255,0.08);
     backdrop-filter:blur(10px);
-    transition:0.3s;
 }
 
-.card:hover{
-    transform:translateY(-3px);
-    border-color:#00e676;
-}
-
-/* TITLE */
+/* TEXT */
 .title{
     font-size:18px;
     color:#2f81f7;
     margin-bottom:8px;
 }
 
-/* PRICE */
 .price{
     margin:10px 0;
     color:#00e676;
     font-weight:bold;
 }
 
-/* BUTTON */
+/* BUTTONS */
 button{
     width:100%;
     padding:12px;
@@ -124,6 +117,7 @@ button{
     border:1px solid rgba(255,255,255,0.1);
 }
 
+/* HIDDEN */
 .hidden{display:none;}
 
 .note{
@@ -138,7 +132,7 @@ button{
 <body>
 
 <div class="header">
-    <h1>فروشگاه کانفیگ حرفه‌ای</h1>
+    <h1>فروشگاه کانفیگ فروشگاهگ</h1>
     <p>سریع | پایدار | نامحدود</p>
 </div>
 
@@ -183,9 +177,18 @@ button{
 
     <button class="buy" onclick="copyCard()">کپی کارت</button>
 
-    <button class="done" onclick="done()">✔ پرداخت کردم</button>
+    <button class="done" onclick="paidDone()">✔ پرداخت کردم</button>
 
-    <div class="note">بعد از زدن دکمه شما به پشتیبانی منتقل می‌شوید</div>
+    <!-- RUBIKA -->
+    <div id="rubikaBox" class="hidden">
+        <p style="margin-top:15px;">
+            📸 عکس رسید را به آیدی زیر در روبیکا ارسال کنید:
+        </p>
+
+        <div class="bank">@Omidi</div>
+
+        <button class="buy" onclick="copyRubika()">کپی آیدی</button>
+    </div>
 
 </div>
 
@@ -195,6 +198,7 @@ let selectedPlan="";
 
 function goPay(plan){
     selectedPlan = plan;
+
     document.getElementById("selected").innerHTML =
     "پلن انتخابی: " + plan;
 
@@ -207,9 +211,13 @@ function copyCard(){
     alert("کپی شد");
 }
 
-function done(){
-    // اینجا پیوی خودت
-    window.location.href = "https://t.me/yourusername";
+function paidDone(){
+    document.getElementById("rubikaBox").classList.remove("hidden");
+}
+
+function copyRubika(){
+    navigator.clipboard.writeText("@Omidi");
+    alert("آیدی کپی شد");
 }
 
 </script>
