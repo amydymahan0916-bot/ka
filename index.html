@@ -11,13 +11,13 @@
 
 body{
     margin:0;
-    font-family:"Vazirmatn",sans-serif;
+    font-family:"Vazirmatn";
     background:#070b14;
     color:white;
     direction:rtl;
 }
 
-/* GRID BACKGROUND */
+/* BACKGROUND */
 body::before{
     content:"";
     position:fixed;
@@ -32,7 +32,7 @@ body::before{
 /* HEADER */
 .header{
     text-align:center;
-    padding:40px 15px 20px;
+    padding:40px 15px 10px;
 }
 
 .header h1{
@@ -43,7 +43,15 @@ body::before{
 }
 
 .header p{
+    opacity:0.75;
+}
+
+/* SECTION TEXT */
+.sub{
+    text-align:center;
+    font-size:14px;
     opacity:0.7;
+    margin-bottom:20px;
 }
 
 /* CARDS */
@@ -63,17 +71,28 @@ body::before{
     background:rgba(255,255,255,0.04);
     border:1px solid rgba(255,255,255,0.08);
     backdrop-filter:blur(10px);
+    transition:0.3s;
 }
 
-/* TEXT */
+.card:hover{
+    transform:translateY(-3px);
+    border-color:#00e676;
+}
+
+/* PLAN TEXT */
 .title{
     font-size:18px;
     color:#2f81f7;
-    margin-bottom:8px;
+    margin-bottom:6px;
+}
+
+.desc{
+    font-size:13px;
+    opacity:0.7;
 }
 
 .price{
-    margin:10px 0;
+    margin-top:10px;
     color:#00e676;
     font-weight:bold;
 }
@@ -86,18 +105,18 @@ button{
     border-radius:12px;
     font-weight:bold;
     cursor:pointer;
-    margin-top:8px;
+    margin-top:10px;
 }
 
 .buy{
     background:linear-gradient(135deg,#00c853,#00e676);
 }
 
-.done{
+.paybtn{
     background:linear-gradient(135deg,#ffb300,#ff6f00);
 }
 
-/* PAY BOX */
+/* PAY PAGE */
 .pay{
     width:92%;
     max-width:380px;
@@ -117,14 +136,13 @@ button{
     border:1px solid rgba(255,255,255,0.1);
 }
 
-/* HIDDEN */
-.hidden{display:none;}
-
 .note{
     font-size:12px;
     opacity:0.7;
     margin-top:10px;
 }
+
+.hidden{display:none;}
 
 </style>
 </head>
@@ -132,32 +150,36 @@ button{
 <body>
 
 <div class="header">
-    <h1>فروشگاه کانفیگ فروشگاهگ</h1>
-    <p>سریع | پایدار | نامحدود</p>
+    <h1>⚡ سرویس کانفیگ پایدار و پرسرعت</h1>
+    <p>بدون قطعی | مناسب گیم و شبکه‌های اجتماعی</p>
+</div>
+
+<div class="sub">
+    ✔ تحویل فوری بعد از پرداخت | فعال‌سازی زیر ۵ دقیقه
 </div>
 
 <!-- PLANS -->
 <div class="container" id="plans">
 
     <div class="card">
-        <div class="title">🔵 ۱ هفته‌ای</div>
-        <div>حجم نامحدود</div>
+        <div class="title">🟢 پلن ۱ هفته‌ای (پیشنهادی)</div>
+        <div class="desc">مناسب تست و مصرف کوتاه</div>
         <div class="price">120,000 تومان</div>
-        <button class="buy" onclick="goPay('۱ هفته‌ای')">انتخاب</button>
+        <button class="buy" onclick="goPay('۱ هفته‌ای')">🚀 دریافت سرویس</button>
     </div>
 
     <div class="card">
-        <div class="title">🟣 ۲ هفته‌ای</div>
-        <div>حجم نامحدود</div>
+        <div class="title">🔵 پلن ۲ هفته‌ای</div>
+        <div class="desc">مناسب استفاده متوسط</div>
         <div class="price">220,000 تومان</div>
-        <button class="buy" onclick="goPay('۲ هفته‌ای')">انتخاب</button>
+        <button class="buy" onclick="goPay('۲ هفته‌ای')">🚀 دریافت سرویس</button>
     </div>
 
     <div class="card">
-        <div class="title">🟢 ۱ ماهه</div>
-        <div>حجم نامحدود</div>
+        <div class="title">🟣 پلن ۱ ماهه</div>
+        <div class="desc">بهترین انتخاب کاربران حرفه‌ای</div>
         <div class="price">350,000 تومان</div>
-        <button class="buy" onclick="goPay('۱ ماهه')">انتخاب</button>
+        <button class="buy" onclick="goPay('۱ ماهه')">🚀 دریافت سرویس</button>
     </div>
 
 </div>
@@ -165,30 +187,34 @@ button{
 <!-- PAY -->
 <div class="pay hidden" id="payBox">
 
-    <h3>💳 پرداخت سفارش</h3>
+    <h3>💳 تکمیل سفارش و پرداخت</h3>
+
+    <p class="sub">مبلغ را کارت به کارت کنید و سپس تایید بزنید</p>
 
     <div class="bank">
-        6037 - 9971 - 9478 - 4360
+        💳 6037 **** **** 4360
         <br>
-        ماهان امیدی
+        👤 ماهان امیدی
     </div>
 
     <div id="selected"></div>
 
-    <button class="buy" onclick="copyCard()">کپی کارت</button>
+    <button class="buy" onclick="copyCard()">📋 کپی شماره کارت</button>
 
-    <button class="done" onclick="paidDone()">✔ پرداخت کردم</button>
+    <button class="paybtn" onclick="paidDone()">✔ تایید پرداخت</button>
 
     <!-- RUBIKA -->
     <div id="rubikaBox" class="hidden">
         <p style="margin-top:15px;">
-            📸 عکس رسید را به آیدی زیر در روبیکا ارسال کنید:
+            📌 لطفاً رسید پرداخت را برای بررسی سریع ارسال کنید
         </p>
 
         <div class="bank">@Omidi</div>
 
-        <button class="buy" onclick="copyRubika()">کپی آیدی</button>
+        <button class="buy" onclick="copyRubika()">📋 کپی آیدی پشتیبانی</button>
     </div>
+
+    <div class="note">پشتیبانی پس از ارسال رسید فعال‌سازی را انجام می‌دهد</div>
 
 </div>
 
@@ -200,7 +226,7 @@ function goPay(plan){
     selectedPlan = plan;
 
     document.getElementById("selected").innerHTML =
-    "پلن انتخابی: " + plan;
+    "📦 پلن انتخابی: " + plan;
 
     document.getElementById("plans").classList.add("hidden");
     document.getElementById("payBox").classList.remove("hidden");
@@ -208,7 +234,7 @@ function goPay(plan){
 
 function copyCard(){
     navigator.clipboard.writeText("6037997194784360");
-    alert("کپی شد");
+    alert("شماره کارت کپی شد");
 }
 
 function paidDone(){
@@ -216,8 +242,8 @@ function paidDone(){
 }
 
 function copyRubika(){
-    navigator.clipboard.writeText("@Omidi");
-    alert("آیدی کپی شد");
+    navigator.clipboard.writeText("@Omidi__Xx");
+    alert("آیدی پشتیبانی کپی شد");
 }
 
 </script>
