@@ -25,7 +25,6 @@ body::before{
     linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),
     linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);
     background-size:40px 40px;
-    pointer-events:none;
 }
 
 .header{
@@ -61,8 +60,21 @@ body::before{
     border:1px solid rgba(255,255,255,0.08);
 }
 
-.title{color:#2f81f7;font-size:18px}
-.price{color:#00e676;font-weight:bold;margin-top:10px}
+.title{
+    font-size:18px;
+    color:#2f81f7;
+}
+
+.desc{
+    font-size:13px;
+    opacity:0.7;
+}
+
+.price{
+    margin-top:10px;
+    color:#00e676;
+    font-weight:bold;
+}
 
 button{
     width:100%;
@@ -76,40 +88,6 @@ button{
 
 .buy{
     background:linear-gradient(135deg,#00c853,#00e676);
-}
-
-.pay{
-    width:92%;
-    max-width:380px;
-    margin:20px auto;
-    padding:18px;
-    border-radius:16px;
-    background:rgba(255,255,255,0.04);
-}
-
-.bank{
-    background:#0f172a;
-    padding:10px;
-    border-radius:10px;
-    margin:10px 0;
-}
-
-select{
-    width:100%;
-    padding:10px;
-    border-radius:10px;
-    border:none;
-    background:#0f172a;
-    color:white;
-    margin-top:10px;
-}
-
-.hidden{display:none;}
-
-.smallPrice{
-    margin-top:10px;
-    color:#ffb300;
-    font-weight:bold;
 }
 
 .payBox{
@@ -137,6 +115,25 @@ select{
     font-weight:bold;
 }
 
+.bank{
+    background:#0f172a;
+    padding:10px;
+    border-radius:10px;
+    margin:10px 0;
+}
+
+select{
+    width:100%;
+    padding:10px;
+    border-radius:10px;
+    border:none;
+    background:#0f172a;
+    color:white;
+    margin-top:10px;
+}
+
+.hidden{display:none;}
+
 </style>
 </head>
 
@@ -144,27 +141,31 @@ select{
 
 <div class="header">
     <h1>⚡ فروشگاه کانفیگ ماهان</h1>
+    <p>بدون قطعی | مناسب گیم و شبکه‌های اجتماعی</p>
 </div>
 
 <!-- STEP 1 -->
 <div class="container" id="step1">
 
     <div class="card">
-        <div class="title">۱ هفته‌ای</div>
+        <div class="title">🟢 پلن ۱ هفته‌ای (پیشنهادی)</div>
+        <div class="desc">مناسب تست و مصرف کوتاه</div>
         <div class="price">120,000 تومان</div>
-        <button class="buy" onclick="selectPlan('۱ هفته‌ای',120000)">انتخاب</button>
+        <button class="buy" onclick="selectPlan('۱ هفته‌ای',120000)">🚀 دریافت سرویس</button>
     </div>
 
     <div class="card">
-        <div class="title">۲ هفته‌ای</div>
+        <div class="title">🔵 پلن ۲ هفته‌ای</div>
+        <div class="desc">مناسب استفاده متوسط</div>
         <div class="price">220,000 تومان</div>
-        <button class="buy" onclick="selectPlan('۲ هفته‌ای',220000)">انتخاب</button>
+        <button class="buy" onclick="selectPlan('۲ هفته‌ای',220000)">🚀 دریافت سرویس</button>
     </div>
 
     <div class="card">
-        <div class="title">۱ ماهه</div>
+        <div class="title">🟣 پلن ۱ ماهه</div>
+        <div class="desc">بهترین انتخاب کاربران حرفه‌ای</div>
         <div class="price">350,000 تومان</div>
-        <button class="buy" onclick="selectPlan('۱ ماهه',350000)">انتخاب</button>
+        <button class="buy" onclick="selectPlan('۱ ماهه',350000)">🚀 دریافت سرویس</button>
     </div>
 
 </div>
@@ -181,7 +182,7 @@ select{
             <option value="3">3 کاربره</option>
         </select>
 
-        <div class="smallPrice" id="livePrice">قیمت: ---</div>
+        <div class="desc" id="livePrice">قیمت: ---</div>
 
         <button class="buy" onclick="goPay()">ادامه</button>
     </div>
