@@ -11,13 +11,13 @@
 
 body{
     margin:0;
-    font-family:"Vazirmatn";
+    font-family:"Vazirmatn",sans-serif;
     background:#070b14;
     color:white;
     direction:rtl;
 }
 
-/* BACKGROUND */
+/* BACKGROUND GRID */
 body::before{
     content:"";
     position:fixed;
@@ -46,14 +46,6 @@ body::before{
     opacity:0.75;
 }
 
-/* SECTION TEXT */
-.sub{
-    text-align:center;
-    font-size:14px;
-    opacity:0.7;
-    margin-bottom:20px;
-}
-
 /* CARDS */
 .container{
     display:flex;
@@ -71,19 +63,11 @@ body::before{
     background:rgba(255,255,255,0.04);
     border:1px solid rgba(255,255,255,0.08);
     backdrop-filter:blur(10px);
-    transition:0.3s;
 }
 
-.card:hover{
-    transform:translateY(-3px);
-    border-color:#00e676;
-}
-
-/* PLAN TEXT */
 .title{
     font-size:18px;
     color:#2f81f7;
-    margin-bottom:6px;
 }
 
 .desc{
@@ -116,7 +100,7 @@ button{
     background:linear-gradient(135deg,#ffb300,#ff6f00);
 }
 
-/* PAY PAGE */
+/* PAY */
 .pay{
     width:92%;
     max-width:380px;
@@ -154,10 +138,6 @@ button{
     <p>بدون قطعی | مناسب گیم و شبکه‌های اجتماعی</p>
 </div>
 
-<div class="sub">
-    ✔ تحویل فوری بعد از پرداخت | فعال‌سازی زیر ۵ دقیقه
-</div>
-
 <!-- PLANS -->
 <div class="container" id="plans">
 
@@ -189,15 +169,20 @@ button{
 
     <h3>💳 تکمیل سفارش و پرداخت</h3>
 
-    <p class="sub">مبلغ را کارت به کارت کنید و سپس تایید بزنید</p>
+    <p class="desc">لطفاً مبلغ زیر را کارت به کارت کنید</p>
 
+    <!-- پلن -->
+    <div class="bank" id="planBox">پلن انتخاب نشده</div>
+
+    <!-- مبلغ -->
+    <div class="bank" id="priceBox">مبلغ: ---</div>
+
+    <!-- کارت -->
     <div class="bank">
         💳 6037 **** **** 4360
         <br>
         👤 ماهان امیدی
     </div>
-
-    <div id="selected"></div>
 
     <button class="buy" onclick="copyCard()">📋 کپی شماره کارت</button>
 
@@ -206,27 +191,44 @@ button{
     <!-- RUBIKA -->
     <div id="rubikaBox" class="hidden">
         <p style="margin-top:15px;">
-            📌 لطفاً رسید پرداخت را برای بررسی سریع ارسال کنید
+            📌 لطفاً رسید پرداخت را ارسال کنید
         </p>
 
         <div class="bank">@Omidi</div>
 
-        <button class="buy" onclick="copyRubika()">📋 کپی آیدی پشتیبانی</button>
+        <button class="buy" onclick="copyRubika()">📋 کپی آیدی</button>
     </div>
 
-    <div class="note">پشتیبانی پس از ارسال رسید فعال‌سازی را انجام می‌دهد</div>
+    <div class="note">
+        بررسی و فعال‌سازی بعد از ارسال رسید انجام می‌شود
+    </div>
 
 </div>
 
 <script>
 
 let selectedPlan="";
+let selectedPrice="";
 
 function goPay(plan){
+
     selectedPlan = plan;
 
-    document.getElementById("selected").innerHTML =
+    if(plan=="۱ هفته‌ای"){
+        selectedPrice="120,000 تومان";
+    }
+    if(plan=="۲ هفته‌ای"){
+        selectedPrice="220,000 تومان";
+    }
+    if(plan=="۱ ماهه"){
+        selectedPrice="350,000 تومان";
+    }
+
+    document.getElementById("planBox").innerHTML =
     "📦 پلن انتخابی: " + plan;
+
+    document.getElementById("priceBox").innerHTML =
+    "💰 مبلغ قابل پرداخت: " + selectedPrice;
 
     document.getElementById("plans").classList.add("hidden");
     document.getElementById("payBox").classList.remove("hidden");
@@ -242,8 +244,8 @@ function paidDone(){
 }
 
 function copyRubika(){
-    navigator.clipboard.writeText("@Omidi__Xx");
-    alert("آیدی پشتیبانی کپی شد");
+    navigator.clipboard.writeText("@Omidi__xx");
+    alert("آیدی کپی شد");
 }
 
 </script>
