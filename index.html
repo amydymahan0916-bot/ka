@@ -17,7 +17,6 @@ body{
     direction:rtl;
 }
 
-/* BACKGROUND GRID (مثل قبلی خودت) */
 body::before{
     content:"";
     position:fixed;
@@ -29,7 +28,6 @@ body::before{
     pointer-events:none;
 }
 
-/* HEADER (کامل مثل نسخه اول) */
 .header{
     text-align:center;
     padding:40px 15px 10px;
@@ -46,7 +44,6 @@ body::before{
     opacity:0.75;
 }
 
-/* CARDS */
 .container{
     display:flex;
     flex-direction:column;
@@ -62,26 +59,11 @@ body::before{
     border-radius:16px;
     background:rgba(255,255,255,0.04);
     border:1px solid rgba(255,255,255,0.08);
-    backdrop-filter:blur(10px);
 }
 
-.title{
-    font-size:18px;
-    color:#2f81f7;
-}
+.title{color:#2f81f7;font-size:18px}
+.price{color:#00e676;font-weight:bold;margin-top:10px}
 
-.desc{
-    font-size:13px;
-    opacity:0.7;
-}
-
-.price{
-    margin-top:10px;
-    color:#00e676;
-    font-weight:bold;
-}
-
-/* BUTTONS */
 button{
     width:100%;
     padding:12px;
@@ -96,11 +78,6 @@ button{
     background:linear-gradient(135deg,#00c853,#00e676);
 }
 
-.paybtn{
-    background:linear-gradient(135deg,#ffb300,#ff6f00);
-}
-
-/* PAY */
 .pay{
     width:92%;
     max-width:380px;
@@ -108,8 +85,6 @@ button{
     padding:18px;
     border-radius:16px;
     background:rgba(255,255,255,0.04);
-    border:1px solid rgba(255,255,255,0.08);
-    text-align:center;
 }
 
 .bank{
@@ -117,13 +92,6 @@ button{
     padding:10px;
     border-radius:10px;
     margin:10px 0;
-    border:1px solid rgba(255,255,255,0.1);
-}
-
-.note{
-    font-size:12px;
-    opacity:0.7;
-    margin-top:10px;
 }
 
 select{
@@ -138,6 +106,37 @@ select{
 
 .hidden{display:none;}
 
+.smallPrice{
+    margin-top:10px;
+    color:#ffb300;
+    font-weight:bold;
+}
+
+.payBox{
+    width:92%;
+    max-width:380px;
+    margin:20px auto;
+    padding:18px;
+    border-radius:16px;
+    background:rgba(255,255,255,0.05);
+}
+
+.row{
+    display:flex;
+    justify-content:space-between;
+    margin:8px 0;
+}
+
+.total{
+    text-align:center;
+    padding:10px;
+    background:#0f172a;
+    border-radius:10px;
+    margin-top:10px;
+    color:#00e676;
+    font-weight:bold;
+}
+
 </style>
 </head>
 
@@ -145,31 +144,27 @@ select{
 
 <div class="header">
     <h1>⚡ فروشگاه کانفیگ ماهان</h1>
-    <p>بدون قطعی | مناسب گیم و شبکه‌های اجتماعی</p>
 </div>
 
 <!-- STEP 1 -->
 <div class="container" id="step1">
 
     <div class="card">
-        <div class="title">🟢 پلن ۱ هفته‌ای (پیشنهادی)</div>
-        <div class="desc">مناسب تست و مصرف کوتاه</div>
+        <div class="title">۱ هفته‌ای</div>
         <div class="price">120,000 تومان</div>
-        <button class="buy" onclick="selectPlan('۱ هفته‌ای',120000)">🚀 دریافت سرویس</button>
+        <button class="buy" onclick="selectPlan('۱ هفته‌ای',120000)">انتخاب</button>
     </div>
 
     <div class="card">
-        <div class="title">🔵 پلن ۲ هفته‌ای</div>
-        <div class="desc">مناسب استفاده متوسط</div>
+        <div class="title">۲ هفته‌ای</div>
         <div class="price">220,000 تومان</div>
-        <button class="buy" onclick="selectPlan('۲ هفته‌ای',220000)">🚀 دریافت سرویس</button>
+        <button class="buy" onclick="selectPlan('۲ هفته‌ای',220000)">انتخاب</button>
     </div>
 
     <div class="card">
-        <div class="title">🟣 پلن ۱ ماهه</div>
-        <div class="desc">بهترین انتخاب کاربران حرفه‌ای</div>
+        <div class="title">۱ ماهه</div>
         <div class="price">350,000 تومان</div>
-        <button class="buy" onclick="selectPlan('۱ ماهه',350000)">🚀 دریافت سرویس</button>
+        <button class="buy" onclick="selectPlan('۱ ماهه',350000)">انتخاب</button>
     </div>
 
 </div>
@@ -186,54 +181,47 @@ select{
             <option value="3">3 کاربره</option>
         </select>
 
-        <div class="desc" id="livePrice">قیمت: ---</div>
+        <div class="smallPrice" id="livePrice">قیمت: ---</div>
 
-        <button class="buy" onclick="goPay()">ادامه به پرداخت</button>
+        <button class="buy" onclick="goPay()">ادامه</button>
     </div>
 
 </div>
 
 <!-- STEP 3 -->
-<div class="pay hidden" id="step3">
+<div class="payBox hidden" id="step3">
 
-    <h3>💳 تکمیل سفارش و پرداخت</h3>
+    <h3>💳 پرداخت نهایی</h3>
 
-    <p class="desc">لطفاً مبلغ زیر را کارت به کارت کنید</p>
+    <div class="row"><span>پلن</span><span id="pPlan"></span></div>
+    <div class="row"><span>کاربر</span><span id="pUser"></span></div>
+    <div class="row"><span>قیمت پایه</span><span id="pBase"></span></div>
+    <div class="row"><span>تخفیف</span><span id="pDiscount"></span></div>
 
-    <div class="bank" id="info"></div>
+    <div class="total" id="pFinal"></div>
 
     <div class="bank">
-        💳 6037 **** **** 4360
-        <br>
+        💳 6037 **** **** 4360<br>
         👤 ماهان امیدی
     </div>
 
-    <div class="bank" id="finalPrice"></div>
-
-    <button class="buy" onclick="copyCard()">📋 کپی کارت</button>
-    <button class="paybtn" onclick="paidDone()">✔ پرداخت کردم</button>
-
-    <div id="rubikaBox" class="hidden">
-        <p>📌 ارسال رسید به:</p>
-        <div class="bank">@Omidi</div>
-    </div>
-
-    <div class="note">
-        بررسی و فعال‌سازی بعد از ارسال رسید انجام می‌شود
-    </div>
+    <button class="buy" onclick="copyCard()">کپی کارت</button>
 
 </div>
 
 <script>
 
-let planName="";
-let basePrice=0;
+function format(n){
+    return n.toLocaleString("en-US");
+}
+
+let plan="";
+let base=0;
 let users=1;
 
 function selectPlan(name,price){
-
-    planName=name;
-    basePrice=price;
+    plan=name;
+    base=price;
 
     document.getElementById("step1").classList.add("hidden");
     document.getElementById("step2").classList.remove("hidden");
@@ -242,18 +230,16 @@ function selectPlan(name,price){
 }
 
 function updatePrice(){
-
     users=document.getElementById("users").value;
-
-    let price=basePrice*users;
+    let price=base*users;
 
     document.getElementById("livePrice").innerText =
-    "💰 قیمت لحظه‌ای: " + price + " تومان";
+    "💰 قیمت لحظه‌ای: " + format(price) + " تومان";
 }
 
 function goPay(){
 
-    let price=basePrice*users;
+    let price=base*users;
 
     let discountPercent=Math.floor(Math.random()*15)+1;
     let discount=Math.floor(price*discountPercent/100);
@@ -262,13 +248,11 @@ function goPay(){
     document.getElementById("step2").classList.add("hidden");
     document.getElementById("step3").classList.remove("hidden");
 
-    document.getElementById("info").innerHTML=
-    "📦 پلن: "+planName+"<br>👤 کاربر: "+users;
-
-    document.getElementById("finalPrice").innerHTML=
-    "💰 قیمت اصلی: "+price+"<br>"+
-    "🔥 تخفیف: "+discountPercent+"% (-"+discount+")<br><br>"+
-    "💳 مبلغ نهایی: "+final+" تومان";
+    document.getElementById("pPlan").innerText=plan;
+    document.getElementById("pUser").innerText=users+" کاربره";
+    document.getElementById("pBase").innerText=format(price)+" تومان";
+    document.getElementById("pDiscount").innerText=discountPercent+"% (-"+format(discount)+")";
+    document.getElementById("pFinal").innerText="💳 مبلغ نهایی: "+format(final)+" تومان";
 }
 
 function copyCard(){
@@ -276,11 +260,7 @@ function copyCard(){
     alert("کپی شد");
 }
 
-function paidDone(){
-    document.getElementById("rubikaBox").classList.remove("hidden");
-}
-
 </script>
 
 </body>
-                </html>
+</html>
