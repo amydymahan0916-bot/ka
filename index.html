@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nabeghe Clone</title>
+<title>VPN Shop</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;700&display=swap" rel="stylesheet">
 
@@ -11,50 +11,72 @@
 
 body{
     margin:0;
-    font-family:"Vazirmatn",sans-serif;
+    font-family:"Vazirmatn";
     background:#070b14;
     color:white;
     direction:rtl;
 }
 
-/* GRID BACKGROUND مثل عکس */
+/* GRID BACKGROUND */
 body::before{
     content:"";
     position:fixed;
     inset:0;
     background-image:
-    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);
     background-size:40px 40px;
     pointer-events:none;
 }
 
-/* TOP TIMER */
-.top-bar{
+/* TOP STEPPER */
+.stepper{
     display:flex;
-    justify-content:center;
-    padding:15px;
+    justify-content:space-between;
+    padding:20px 15px;
+    max-width:420px;
+    margin:auto;
 }
 
-.timer{
-    padding:8px 18px;
-    border-radius:25px;
-    border:1px solid #2f81f7;
-    color:#2f81f7;
-    font-weight:bold;
-    font-size:14px;
-    box-shadow:0 0 20px rgba(47,129,247,0.3);
-}
-
-/* LOGO SECTION */
-.logo-box{
+.step{
     text-align:center;
-    margin-top:20px;
+    flex:1;
+    position:relative;
+}
+
+.step .circle{
+    width:38px;
+    height:38px;
+    margin:auto;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,0.2);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:13px;
+    color:#aaa;
+}
+
+.step.active .circle{
+    border-color:#2f81f7;
+    color:#2f81f7;
+    box-shadow:0 0 12px rgba(47,129,247,0.4);
+}
+
+.step span{
+    font-size:11px;
+    opacity:0.6;
+}
+
+/* HEADER CARD */
+.header{
+    text-align:center;
+    margin-top:10px;
 }
 
 .logo{
-    width:90px;
-    height:90px;
+    width:85px;
+    height:85px;
     margin:auto;
     border-radius:50%;
     background:radial-gradient(circle,#0d1b2a,#05070d);
@@ -62,85 +84,44 @@ body::before{
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:40px;
-    font-weight:bold;
+    font-size:36px;
     color:#2f81f7;
-    box-shadow:0 0 30px rgba(47,129,247,0.4);
+    box-shadow:0 0 25px rgba(47,129,247,0.4);
 }
 
-.title{
-    font-size:34px;
-    margin-top:15px;
-    font-weight:700;
-    letter-spacing:1px;
+h1{
+    font-size:30px;
+    margin-top:10px;
 }
 
-/* BADGES */
 .badges{
     display:flex;
     justify-content:center;
-    gap:10px;
+    gap:8px;
     flex-wrap:wrap;
-    margin-top:15px;
+    margin-top:10px;
 }
 
 .badge{
-    padding:6px 12px;
+    font-size:11px;
+    padding:6px 10px;
     border-radius:20px;
-    font-size:12px;
-    border:1px solid rgba(255,255,255,0.1);
-    background:rgba(255,255,255,0.03);
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.08);
 }
 
-/* WARNING BOX */
-.warn{
-    margin:25px auto;
+/* ALERT */
+.alert{
+    margin:20px auto;
     width:90%;
     max-width:420px;
-    padding:15px;
-    border-radius:14px;
+    padding:12px;
+    border-radius:12px;
     border:1px solid #f59e0b;
     background:rgba(245,158,11,0.08);
     color:#fbbf24;
     display:flex;
     justify-content:space-between;
-    align-items:center;
-}
-
-/* STEPS */
-.steps{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    margin:30px 10px;
-}
-
-.step{
-    width:60px;
-    text-align:center;
-}
-
-.circle{
-    width:40px;
-    height:40px;
-    margin:auto;
-    border-radius:50%;
-    border:1px solid rgba(255,255,255,0.2);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#aaa;
-}
-
-.step.active .circle{
-    border-color:#2f81f7;
-    color:#2f81f7;
-    box-shadow:0 0 15px rgba(47,129,247,0.3);
-}
-
-.step span{
-    font-size:11px;
-    opacity:0.7;
 }
 
 /* SECTION */
@@ -150,45 +131,63 @@ body::before{
 }
 
 .section h3{
-    font-size:18px;
+    font-size:17px;
+    opacity:0.9;
 }
 
-/* PLAN CARDS (پایین صفحه) */
+/* PLAN BOXES */
 .plans{
     display:flex;
     flex-direction:column;
-    align-items:center;
     gap:15px;
-    margin-top:20px;
+    align-items:center;
+    margin-top:15px;
 }
 
 .plan{
     width:90%;
-    max-width:380px;
-    padding:18px;
+    max-width:420px;
+    padding:16px;
     border-radius:16px;
     background:rgba(255,255,255,0.04);
     border:1px solid rgba(255,255,255,0.08);
     backdrop-filter:blur(10px);
 }
 
-.plan h4{
-    margin:0;
-    color:#2f81f7;
+.plan-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-.plan p{
-    opacity:0.7;
-    margin:10px 0;
+.plan h3{
+    margin:0;
+    color:#2f81f7;
+    font-size:16px;
+}
+
+.plan small{
+    opacity:0.6;
 }
 
 .price{
+    margin-top:10px;
     color:#00e676;
     font-weight:bold;
 }
 
+/* RADIO */
+.radio{
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    border:2px solid rgba(255,255,255,0.2);
+}
+
+/* BUTTON */
 button{
     width:100%;
+    margin-top:12px;
     padding:12px;
     border:none;
     border-radius:12px;
@@ -202,34 +201,15 @@ button{
 
 <body>
 
-<div class="top-bar">
-    <div class="timer" id="timer">13:38:31</div>
-</div>
-
-<div class="logo-box">
-    <div class="logo">N</div>
-    <div class="title">NabegheVPN</div>
-
-    <div class="badges">
-        <div class="badge">پشتیبانی ۲۴/۷</div>
-        <div class="badge">سرعت بالا ⚡</div>
-        <div class="badge">ترافیک نامحدود ∞</div>
-    </div>
-</div>
-
-<div class="warn">
-    <div>اختلال در برخی اپراتورها</div>
-    <div>⚡</div>
-</div>
-
-<div class="steps">
+<!-- STEP -->
+<div class="stepper">
     <div class="step active">
         <div class="circle">1</div>
-        <span>انتخاب پلن</span>
+        <span>انتخاب</span>
     </div>
     <div class="step">
         <div class="circle">2</div>
-        <span>تعداد کاربر</span>
+        <span>کاربر</span>
     </div>
     <div class="step">
         <div class="circle">3</div>
@@ -237,7 +217,7 @@ button{
     </div>
     <div class="step">
         <div class="circle">4</div>
-        <span>واریز</span>
+        <span>پرداخت</span>
     </div>
     <div class="step">
         <div class="circle">5</div>
@@ -245,41 +225,57 @@ button{
     </div>
 </div>
 
+<!-- HEADER -->
+<div class="header">
+    <div class="logo">N</div>
+    <h1>NabegheVPN</h1>
+
+    <div class="badges">
+        <div class="badge">پشتیبانی ۲۴/۷</div>
+        <div class="badge">سرعت بالا</div>
+        <div class="badge">نامحدود</div>
+    </div>
+</div>
+
+<!-- ALERT -->
+<div class="alert">
+    <div>اختلال در برخی اپراتورها</div>
+    <div>⚡</div>
+</div>
+
+<!-- TITLE -->
 <div class="section">
     <h3>مدت زمان سرویس را انتخاب کنید</h3>
 </div>
 
+<!-- PLANS -->
 <div class="plans">
 
     <div class="plan">
-        <h4>۲ هفته‌ای</h4>
-        <p>نامحدود</p>
-        <div class="price">120,000 تومان</div>
+        <div class="plan-top">
+            <div>
+                <h3>تک کاربره</h3>
+                <small>دستگاه محدود</small>
+            </div>
+            <div class="radio"></div>
+        </div>
+        <div class="price">350,000 تومان</div>
         <button>انتخاب</button>
     </div>
 
     <div class="plan">
-        <h4>۱ ماهه</h4>
-        <p>نامحدود</p>
-        <div class="price">220,000 تومان</div>
+        <div class="plan-top">
+            <div>
+                <h3>دو کاربره</h3>
+                <small>دو دستگاه</small>
+            </div>
+            <div class="radio"></div>
+        </div>
+        <div class="price">500,000 تومان</div>
         <button>انتخاب</button>
     </div>
 
 </div>
 
-<script>
-// تایمر ساده مثل عکس
-let h=13,m=38,s=31;
-
-setInterval(()=>{
-    s++;
-    if(s==60){s=0;m++}
-    if(m==60){m=0;h++}
-
-    document.getElementById("timer").innerText =
-    `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
-},1000);
-</script>
-
 </body>
-    </html>
+        </html>
